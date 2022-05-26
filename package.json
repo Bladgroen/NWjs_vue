@@ -1,0 +1,154 @@
+{
+  "name": "nwjs",
+  "main": "http://localhost:8964",
+  "node-remote": "http://localhost:8964",
+  "node-main": "",
+  "version": "0.1.0",
+  "private": true,
+  "window": {
+    "width": 600,
+    "height": 400
+  },
+  "nwjs-packager": {
+    "nwVersion": "0.45.4",
+    "appFriendlyName": "Demo App",
+    "appMacIcon": "bin/icon.icns",
+    "appWinIcon": "bin/icon.ico",
+    "files": [
+      "bin/**"
+    ],
+    "builds": {
+      "linux": {
+        "tar.gz": true
+      },
+      "osx": {
+        "zip": true
+      },
+      "win": {
+        "zip": true
+      }
+    }
+  },
+  "build": {
+    "nwVersion": "v0.62.2",
+    "nwFlavor": "normal",
+    "targets": [
+      "zip",
+      "nsis7z"
+    ],
+    "files": [
+      "**/*"
+    ],
+    "excludes": [
+      "e2e/**/*",
+      "src/**/*",
+      "tests/**/*",
+      "public/**/*",
+      "dist-vue/**/*.js.map",
+      "dist-vue/**/*.css.map",
+      "dist-vue/**/*-legacy*",
+      ".browserslistrc",
+      ".eslintrc",
+      ".gitignore",
+      ".editorconfig",
+      "babel.config.js",
+      "CODE_OF_CONDUCT.md",
+      "cypress.json",
+      "jest.config.js",
+      "nightwatch.conf.js",
+      "nightwatch.json",
+      "package-lock.json",
+      "screenshot.png",
+      "selenium-debug.log",
+      "postcss.config.js",
+      "vue.config.js"
+    ],
+    "strippedProperties": [
+      "ManifestComments",
+      "scripts",
+      "devDependencies",
+      "build"
+    ],
+    "overriddenProperties": {
+      "main": "http://localhost:8965",
+      "node-remote": "http://localhost:8965",
+      "node-main": "server.js",
+      "window": {
+        "width": 960,
+        "height": 600,
+        "min_width": 700,
+        "min_height": 500,
+        "icon": "dist-vue/favicon.png"
+      }
+    },
+    "win": {
+      "icon": "public/favicon.ico"
+    },
+    "mac": {
+      "icon": "public/favicon.icns"
+    },
+    "nsis": {
+      "icon": "public/favicon.ico",
+      "unIcon": "public/favicon.ico",
+      "languages": [
+        "English"
+      ],
+      "diffUpdaters": false,
+      "hashCalculation": true
+    }
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "nw-serve": "nw .",
+    "dist": "build --tasks win-x86,win-x64,linux-x86,linux-x64,mac-x64 --mirror https://dl.nwjs.io/ .",
+    "start": "run --x86 --mirror https://dl.nwjs.io/ .",
+    "build:vue": "vue-cli-service build --modern --dest ./dist-vue",
+    "build:win": "npm run build:win:clean && npm run build:vue && build --tasks win-x86 --mirror https://dl.nwjs.io/ .",
+    "run:win": "dist\\nwjs-0.1.0-win-x86\\nwjs.exe",
+    "build:clean": "rimraf ./dist-vue ./dist",
+    "build:win:clean": "rimraf ./dist-vue ./dist/nw-vue-2.0.0-beta.1-win-x86 ./dist/nw-vue-2.0.0-beta.1-win-x86.zip ./dist/nw-vue-2.0.0-beta.1-win-x86.7z ./dist/nw-vue-2.0.0-beta.1-win-x86-Setup.exe"
+  },
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "particles-bg-vue": "^1.3.5",
+    "vue": "^3.2.13",
+    "vue-marquee-text-component": "^2.0.1",
+    "vue-router": "^4.0.14",
+    "firebase": "^9.8.1",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "nw": "^0.63.1-sdk",
+    "nwjs-builder-phoenix": "^1.15.0",
+    "nwjs-packager": "^1.5.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
